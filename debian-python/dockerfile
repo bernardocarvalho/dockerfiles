@@ -1,0 +1,26 @@
+# https://www.geeksforgeeks.org/running-gui-applications-on-docker-in-linux/
+# https://riptutorial.com/docker/example/21831/running-gui-apps-in-a-linux-container
+# Python3 with pyqt6 QMYSQL in MacOs
+# https://cntnr.io/running-guis-with-docker-on-mac-os-x-a14df6a76efc
+
+# See also https://www.geeksforgeeks.org/running-gui-applications-on-docker-in-linux/
+
+# docker build -t debian-python .
+# ifconfig en0
+# socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
+#  docker run -it -e DISPLAY=192.168.1.28:0  debian-python
+
+FROM debian:latest
+LABEL maintainer="Bernardo Carvalho <bernardo.carvalho@tecnico.ulisboa.pt>"
+RUN apt-get -y update
+RUN apt-get -y install vim-nox git python3-pyqt6 libqt6sql6-mysql
+# Clear Cache
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN mkdir Projects
+
+#RUN git clone https://github.com/ipfn-hpl/esther-python
+
+#CMD cd esther-python
+
+
