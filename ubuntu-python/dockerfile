@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+RUN apt-get -y update
+RUN apt-get -y install firefox vim-nox git libqt6sql6-mysql
+RUN apt-get -y install xauth
+
+EXPOSE 8887
+CMD firefox
+
