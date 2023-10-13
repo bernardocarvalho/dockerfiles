@@ -8,19 +8,25 @@
 # docker build -t debian-python .
 # ifconfig en0
 # socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
-#  docker run -it -e DISPLAY=192.168.1.28:0  debian-python
+#  docker run -it -v ~/tmp:/Projects -e DISPLAY=192.168.1.28:0  debian-python zsh
+
+# You can restart an existing container after it exited and your changes are still there.
+# docker start  `docker ps -q -l` # restart it in the background
+# docker attach `docker ps -q -l`
 
 FROM debian:latest
 LABEL maintainer="Bernardo Carvalho <bernardo.carvalho@tecnico.ulisboa.pt>"
 RUN apt-get -y update
-RUN apt-get -y install vim-nox git python3-pyqt6 libqt6sql6-mysql
+RUN apt-get -y install vim-nox git zsh wget python3-pip python3.11-venv python3-pyqt6 libqt6sql6-mysql
 # Clear Cache
 RUN rm -rf /var/lib/apt/lists/*
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 RUN mkdir Projects
 
 #RUN git clone https://github.com/ipfn-hpl/esther-python
 
 #CMD cd esther-python
+CMD zsh
 
 
