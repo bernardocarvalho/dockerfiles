@@ -22,17 +22,19 @@
 FROM debian:latest
 LABEL maintainer="Bernardo Carvalho <bernardo.carvalho@tecnico.ulisboa.pt>"
 RUN apt-get -y update
-RUN apt-get -y install zsh python3-pip python3.11-venv python3-pyqt6 libqt6sql6-mysql
-RUN apt-get -y install python3-reportlab
+RUN apt-get -y install zsh curl git python3-pip python3.11-venv python3-pyqt6 libqt6sql6-mysql
+RUN apt-get -y install python3-reportlab python3-pyqtgraph python3-pandas
 # Clear Cache
 RUN rm -rf /var/lib/apt/lists/*
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+# RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 RUN mkdir Projects
 
 #RUN git clone https://github.com/ipfn-hpl/esther-python
 
 #CMD cd esther-python
-CMD /usr/bin/zsh
-
+#CMD /usr/bin/zsh
+RUN curl -L git.io/antigen > /root/antigen.zsh
+COPY zshrc-antigen.sh /root/.zshrc
+RUN /usr/bin/zsh /root/.zshrc
 
