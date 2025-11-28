@@ -1,0 +1,23 @@
+
+# run 
+# docker build  -t debian-pyqt6 .
+# docker compose up -d
+# docker compose run --rm debian-x11
+#
+name: debian13-python-qt6
+services:
+  debian-x11:
+    image: debian-pyqt6:latest
+    environment:
+      - DISPLAY=host.docker.internal:0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /Users/bernardo/docker-share:/shared_data
+      # - shared_data:/root/shared_data
+    network_mode: host
+    stdin_open: true # docker run -i
+    tty: true         # docker run -t
+    command: /usr/bin/zsh
+
+volumes:
+  shared_data:

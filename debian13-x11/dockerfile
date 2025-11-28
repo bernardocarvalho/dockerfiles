@@ -1,0 +1,11 @@
+ARG BASE_IMAGE=debian:trixie-slim
+FROM ${BASE_IMAGE} 
+LABEL maintainer="Bernardo Carvalho <bernardo.carvalho@tecnico.ulisboa.pt>"
+
+RUN apt-get -y update
+RUN apt-get -y install zsh curl git python3-pip python3-venv python3-pyqt6 libqt6sql6-mysql libqt6sql6-psql
+RUN apt-get -y install python3-reportlab python3-pyqtgraph python3-pandas
+RUN apt-get install -y --no-install-recommends x11-apps
+# Clear Cache
+RUN apt-get clean 
+RUN rm -rf /var/lib/apt/lists/*
